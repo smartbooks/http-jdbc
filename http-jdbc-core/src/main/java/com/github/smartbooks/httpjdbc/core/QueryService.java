@@ -10,7 +10,7 @@ public class QueryService
     {
         this.conf = conf;
     }
-    
+
     public String Alias()
     {
         return conf.getAlias();

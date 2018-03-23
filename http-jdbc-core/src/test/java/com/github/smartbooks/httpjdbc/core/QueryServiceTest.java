@@ -7,11 +7,42 @@ import java.sql.SQLException;
 public class QueryServiceTest
 {
     @Test
+    public void testConfigManage()
+    {
+        ConfigManage configManage = new ConfigManage();
+
+        configManage.config.add(getJdbcProperty());
+
+        ConfigManage.save(configManage);
+
+        ConfigManage jsonLaod = ConfigManage.load();
+
+        System.out.println(jsonLaod);
+
+        //test service
+        QueryServiceManage.init(jsonLaod);
+
+        QueryService service = QueryServiceManage.getQueryService("bi");
+
+        QueryResult rs = service.Excute("SELECT * FROM FACT_DOWNLOAD WHERE ROWNUM < 5");
+
+        System.out.println(rs);
+    }
+
+    @Test
     public void testQuery()
-            throws SQLException, ClassNotFoundException
     {
         String sql = "SELECT * FROM FACT_DOWNLOAD WHERE ROWNUM < 5";
 
+        QueryService service = new QueryService(getJdbcProperty());
+
+        QueryResult qs = service.Excute(sql);
+
+        System.out.println(qs);
+    }
+
+    public JdbcProperty getJdbcProperty()
+    {
         JdbcProperty conf = new JdbcProperty();
         conf.setAlias("bi");
         conf.setDatabase("ORCL");
@@ -21,11 +52,6 @@ public class QueryServiceTest
         conf.setPort(1521);
         conf.setUser("rd_zslbi");
         conf.setPassword("iblsz");
-
-        QueryService service = new QueryService(conf);
-
-        QueryResult qs = service.Excute(sql);
-
-        System.out.println(qs);
+        return conf;
     }
 }

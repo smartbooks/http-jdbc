@@ -16,13 +16,6 @@ public class QueryResult
     @Override
     public String toString()
     {
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            return mapper.writeValueAsString(this);
-        }
-        catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        return "";
+        return JsonUtil.toJson(this);
     }
 }

@@ -13,6 +13,17 @@ public class JdbcProperty
     private String password;
     private String database;
     private HashMap<String, String> other;
+    private String driverClass;
+
+    public String getDriverClass()
+    {
+        return driverClass;
+    }
+
+    public void setDriverClass(String driverClass)
+    {
+        this.driverClass = driverClass;
+    }
 
     public String getAlias()
     {
