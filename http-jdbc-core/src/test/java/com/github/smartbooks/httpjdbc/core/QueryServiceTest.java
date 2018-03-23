@@ -8,6 +8,7 @@ public class QueryServiceTest
 {
     @Test
     public void testConfigManage()
+            throws SQLException, ClassNotFoundException, InterruptedException
     {
         ConfigManage configManage = new ConfigManage();
 
@@ -27,10 +28,18 @@ public class QueryServiceTest
         QueryResult rs = service.Excute("SELECT * FROM FACT_DOWNLOAD WHERE ROWNUM < 5");
 
         System.out.println(rs);
+
+        ConfigWatch cw = new ConfigWatch();
+        cw.start();
+
+        while (true) {
+            Thread.sleep(2000L);
+        }
     }
 
     @Test
     public void testQuery()
+            throws SQLException, ClassNotFoundException
     {
         String sql = "SELECT * FROM FACT_DOWNLOAD WHERE ROWNUM < 5";
 
@@ -52,6 +61,7 @@ public class QueryServiceTest
         conf.setPort(1521);
         conf.setUser("rd_zslbi");
         conf.setPassword("iblsz");
+        conf.setDriverClass("com.github.smartbooks.httpjdbc.core.QueryService");
         return conf;
     }
 }

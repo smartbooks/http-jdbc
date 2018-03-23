@@ -1,8 +1,7 @@
 package com.github.smartbooks.httpjdbc.core;
 
 import java.lang.reflect.Constructor;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class QueryServiceManage
 {
@@ -11,6 +10,19 @@ public class QueryServiceManage
     public static QueryService getQueryService(String alias)
     {
         return serviceMap.get(alias);
+    }
+
+    public static List<String> getAlias()
+    {
+        List<String> aliasList = new ArrayList<>();
+
+        Iterator<String> it = serviceMap.keySet().iterator();
+        
+        while (it.hasNext()) {
+            aliasList.add(it.next());
+        }
+
+        return aliasList;
     }
 
     public static void init(ConfigManage configManage)

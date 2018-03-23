@@ -17,55 +17,55 @@ public class QueryService
     }
 
     public QueryResult Excute(String sql)
+            throws SQLException, ClassNotFoundException
     {
-        QueryResult qr = new QueryResult();
-        Connection connection = null;
+        synchronized (this) {
 
-        try {
+            QueryResult qr = new QueryResult();
+            Connection connection = null;
 
-            connection = getConnection(conf);
+            try {
 
-            Statement statement = connection.createStatement();
+                connection = getConnection(conf);
 
-            ResultSet rs = statement.executeQuery(sql);
+                Statement statement = connection.createStatement();
 
-            ResultSetMetaData rsd = rs.getMetaData();
+                ResultSet rs = statement.executeQuery(sql);
 
-            int columnCount = rsd.getColumnCount();
+                ResultSetMetaData rsd = rs.getMetaData();
 
-            for (int i = 0; i < columnCount; i++) {
-                ColumnMeta col = new ColumnMeta();
-                col.setName(rsd.getColumnName(i + 1));
-                col.setType(rsd.getColumnTypeName(i + 1));
-                qr.Meta.add(col);
-            }
+                int columnCount = rsd.getColumnCount();
 
-            while (rs.next()) {
-                Object[] row = new Object[columnCount];
                 for (int i = 0; i < columnCount; i++) {
-                    row[i] = rs.getObject(i + 1);
+                    ColumnMeta col = new ColumnMeta();
+                    col.setName(rsd.getColumnName(i + 1));
+                    col.setType(rsd.getColumnTypeName(i + 1));
+                    qr.Meta.add(col);
                 }
-                qr.Data.add(row);
-            }
 
-            rs.close();
-            statement.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        finally {
-            if (null != connection) {
-                try {
-                    connection.close();
+                while (rs.next()) {
+                    Object[] row = new Object[columnCount];
+                    for (int i = 0; i < columnCount; i++) {
+                        row[i] = rs.getObject(i + 1);
+                    }
+                    qr.Data.add(row);
                 }
-                catch (Exception e) {
-                    e.printStackTrace();
+
+                rs.close();
+                statement.close();
+            }
+            finally {
+                if (null != connection) {
+                    try {
+                        connection.close();
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+            return qr;
         }
-
-        return qr;
     }
 
     public Connection getConnection(JdbcProperty conf)
