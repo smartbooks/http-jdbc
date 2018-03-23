@@ -16,15 +16,37 @@ $HTTPJDBC_CONF/jdbc.json
 {
     "config": [
         {
-            "alias": "bi.beijing", 
+            "alias": "bi.rpt", 
             "driver": "oracle.jdbc.driver.OracleDriver", 
-            "url": "jdbc:oracle:thin:@192.168.1.100:1521/ORCL", 
-            "host": "192.168.1.100", 
+            "url": "jdbc:oracle:thin:@host:1521/ORCL", 
+            "host": "host", 
             "port": 1521, 
             "user": "orcl", 
-            "password": "orcl", 
+            "password": "", 
             "database": "ORCL", 
             "other": null, 
+            "driverClass": "com.github.smartbooks.httpjdbc.core.QueryService"
+        },{
+            "alias": "bi.presto",
+            "driver": "com.facebook.presto.jdbc.PrestoDriver",
+            "url": "jdbc:presto://host:8080/catalog/schema",
+            "host": "host",
+            "port": 8080,
+            "user": "root",
+            "password": "",
+            "database": "schema",
+            "other": null,
+            "driverClass": "com.github.smartbooks.httpjdbc.core.QueryService"
+        },{
+            "alias": "bi.mysql",
+            "driver": "com.mysql.jdbc.Driver",
+            "url": "jdbc:mysql://host:3306/database?name=value",
+            "host": "host",
+            "port": 3306,
+            "user": "root",
+            "password": "",
+            "database": "database",
+            "other": null,
             "driverClass": "com.github.smartbooks.httpjdbc.core.QueryService"
         }
     ]
@@ -66,9 +88,27 @@ curl http://localhost:8080/http-jdbc-server/jdbc/alias
     "msg": "ok",
     "code": 100,
     "data": [
-        "bi.hangzhou",
-        "bi.shanghai",
-        "bi.beijing"
+        "bi.rpt",
+        "bi.presto",
+        "bi.mysql"
     ]
 }
+```
+
+## Presto
+```shell
+
+curl http://localhost:8090/http-jdbc-server/jdbc/alias
+
+#查询presto on oracle
+curl -H "Content-Type: application/json" -X POST -d '{"alias":"presto","sql":"select * from oracle.schema.sys_menu","token":"","ttl":0}' http://localhost:8090/http-jdbc-server/jdbc/sql
+
+#查询presto on mongodb
+curl -H "Content-Type: application/json" -X POST -d '{"alias":"presto","sql":"select * from mongodb.db.collection limit 10","token":"","ttl":0}' http://localhost:8090/http-jdbc-server/jdbc/sql
+
+#查询presto on hive
+curl -H "Content-Type: application/json" -X POST -d '{"alias":"presto","sql":"select * from hive.db.table limit 10","token":"","ttl":0}' http://localhost:8090/http-jdbc-server/jdbc/sql
+
+#查询oracle
+curl -H "Content-Type: application/json" -X POST -d '{"alias":"bi.zsl.rpt","sql":"select * from table where rownum < 5","token":"","ttl":0}' http://localhost:8090/http-jdbc-server/jdbc/sql
 ```
