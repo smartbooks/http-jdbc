@@ -5,34 +5,31 @@ import org.apache.commons.io.monitor.FileAlterationObserver;
 
 import java.util.concurrent.TimeUnit;
 
-public class ConfigWatch
-{
+/**
+ * @author smartbooks@qq.com
+ */
+public class ConfigWatch {
     private FileAlterationMonitor monitor;
     private long interval = 5;
 
-    public ConfigWatch()
-    {
+    public ConfigWatch() {
         FileAlterationObserver observer = new FileAlterationObserver(ConfigManage.HTTPJDBC_CONF);
         observer.addListener(new ConfigListener());
         monitor = new FileAlterationMonitor(TimeUnit.SECONDS.toMillis(interval), observer);
     }
 
-    public void start()
-    {
+    public void start() {
         try {
             monitor.start();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void stop()
-    {
+    public void stop() {
         try {
             monitor.stop();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

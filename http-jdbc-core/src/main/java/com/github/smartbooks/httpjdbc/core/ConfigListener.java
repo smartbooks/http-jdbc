@@ -4,6 +4,9 @@ import org.apache.commons.io.monitor.FileAlterationListenerAdaptor;
 
 import java.io.File;
 
+/**
+ * @author smartbooks@qq.com
+ */
 public class ConfigListener
     extends FileAlterationListenerAdaptor {
     @Override

@@ -7,15 +7,16 @@ import com.github.smartbooks.httpjdbc.core.QueryServiceManage;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
+/**
+ * @author smartbooks@qq.com
+ */
 public class ConfigLoadServlet
-        extends HttpServlet
-{
+    extends HttpServlet {
     ConfigWatch configWatch;
 
     @Override
     public void init()
-            throws ServletException
-    {
+        throws ServletException {
         super.init();
 
         ConfigManage configManage = ConfigManage.load();
@@ -23,13 +24,12 @@ public class ConfigLoadServlet
         QueryServiceManage.init(configManage);
 
         configWatch = new ConfigWatch();
-        
+
         configWatch.start();
     }
 
     @Override
-    public void destroy()
-    {
+    public void destroy() {
         super.destroy();
 
         configWatch.stop();

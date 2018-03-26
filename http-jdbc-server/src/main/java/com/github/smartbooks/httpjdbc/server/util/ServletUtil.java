@@ -3,10 +3,12 @@ package com.github.smartbooks.httpjdbc.server.util;
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 
-public class ServletUtil
-{
-    public static String ReadPostBody(HttpServletRequest request)
-    {
+/**
+ * @author smartbooks@qq.com
+ */
+public class ServletUtil {
+
+    public static String readPostBody(HttpServletRequest request) {
         String rs = "";
         BufferedReader br;
         try {
@@ -16,8 +18,7 @@ public class ServletUtil
                 rs += str;
             }
             br.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

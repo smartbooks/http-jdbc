@@ -1,21 +1,27 @@
 package com.github.smartbooks.httpjdbc.core;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QueryResult
-{
-    public List<ColumnMeta> Meta = new ArrayList<>();
+/**
+ * 查询结果
+ *
+ * @author smartbooks@qq.com
+ */
+public class QueryResult {
 
-    public List<Object[]> Data = new ArrayList<>();
+    /**
+     * 元数据信息
+     */
+    public List<ColumnMeta> meta = new ArrayList<>();
+
+    /**
+     * 查询结果数据
+     */
+    public List<Object[]> data = new ArrayList<>();
 
     @Override
-    public String toString()
-    {
-        return JsonUtil.toJson(this);
+    public String toString() {
+        return JsonUtil.toJson(this, true);
     }
 }

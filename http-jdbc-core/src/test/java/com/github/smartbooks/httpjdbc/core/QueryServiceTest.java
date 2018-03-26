@@ -25,7 +25,7 @@ public class QueryServiceTest
 
         QueryService service = QueryServiceManage.getQueryService("bi");
 
-        QueryResult rs = service.Excute("SELECT * FROM FACT_DOWNLOAD WHERE ROWNUM < 5");
+        QueryResult rs = service.excute("SELECT * FROM FACT_DOWNLOAD WHERE ROWNUM < 5");
 
         System.out.println(rs);
 
@@ -45,7 +45,7 @@ public class QueryServiceTest
 
         QueryService service = new QueryService(getJdbcProperty());
 
-        QueryResult qs = service.Excute(sql);
+        QueryResult qs = service.excute(sql);
 
         System.out.println(qs);
     }

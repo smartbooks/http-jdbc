@@ -2,6 +2,9 @@ package com.github.smartbooks.httpjdbc.core;
 
 import java.util.HashMap;
 
+/**
+ * @author smartbooks@qq.com
+ */
 public class JdbcProperty
 {
     private String alias;

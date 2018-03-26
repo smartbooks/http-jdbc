@@ -2,10 +2,11 @@ package com.github.smartbooks.httpjdbc.core;
 
 import java.io.*;
 
-public class FileUtil
-{
-    public static String readFile(File file)
-    {
+/**
+ * @author smartbooks@qq.com
+ */
+public class FileUtil {
+    public static String readFile(File file) {
         StringBuilder textContent = new StringBuilder();
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -14,15 +15,13 @@ public class FileUtil
                 textContent.append(line);
             }
             br.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return textContent.toString();
     }
 
-    public static void writeFile(File file, String text)
-    {
+    public static void writeFile(File file, String text) {
         try {
             if (file.exists()) { file.delete(); }
 
@@ -33,8 +32,7 @@ public class FileUtil
             bw.flush();
 
             bw.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

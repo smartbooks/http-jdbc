@@ -2,6 +2,9 @@ package com.github.smartbooks.httpjdbc.core;
 
 import java.sql.*;
 
+/**
+ * @author smartbooks@qq.com
+ */
 public class QueryService
 {
     private JdbcProperty conf;
@@ -11,12 +14,12 @@ public class QueryService
         this.conf = conf;
     }
 
-    public String Alias()
+    public String alias()
     {
         return conf.getAlias();
     }
 
-    public QueryResult Excute(String sql)
+    public QueryResult excute(String sql)
             throws SQLException, ClassNotFoundException
     {
         synchronized (this) {
@@ -40,7 +43,7 @@ public class QueryService
                     ColumnMeta col = new ColumnMeta();
                     col.setName(rsd.getColumnName(i + 1));
                     col.setType(rsd.getColumnTypeName(i + 1));
-                    qr.Meta.add(col);
+                    qr.meta.add(col);
                 }
 
                 while (rs.next()) {
@@ -48,7 +51,7 @@ public class QueryService
                     for (int i = 0; i < columnCount; i++) {
                         row[i] = rs.getObject(i + 1);
                     }
-                    qr.Data.add(row);
+                    qr.data.add(row);
                 }
 
                 rs.close();

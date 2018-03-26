@@ -14,6 +14,10 @@ $HTTPJDBC_CONF/jdbc.json
 - 配置文件示例
 ```json
 {
+    "redisHost" : "localhost",
+    "redisPort" : 6379,
+    "redisDBIndex" : 0,
+    "token" : ["C4CA4238A0B923820DCC509A6F75849B"],    
     "config": [
         {
             "alias": "bi.rpt", 
@@ -59,8 +63,8 @@ POST http://localhost:8080/http-jdbc-server/jdbc/sql
 {
     "alias": "bi.beijing", 
     "sql": "select * from fact_day_dau where rownum<3", 
-    "token": "", 
-    "ttl": 0
+    "token": "C4CA4238A0B923820DCC509A6F75849B", 
+    "ttl": 500
 }
 
 响应结果:

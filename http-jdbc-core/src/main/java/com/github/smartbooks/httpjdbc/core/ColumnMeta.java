@@ -1,31 +1,28 @@
 package com.github.smartbooks.httpjdbc.core;
 
-public class ColumnMeta
-{
+/**
+ * @author smartbooks@qq.com
+ */
+public class ColumnMeta {
     private String name;
     private String type;
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getType()
-    {
+    public String getType() {
         return type;
     }
 
-    public void setType(String type)
-    {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public ColumnMeta()
-    {
+    public ColumnMeta() {
     }
 }

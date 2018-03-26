@@ -1,9 +1,30 @@
 package com.github.smartbooks.httpjdbc.server.model;
 
+/**
+ * 查询参数
+ *
+ * @author smartbooks@qq.com
+ */
 public class AnsiSqlQueryActionRequest {
+
+    /**
+     * 查询sql
+     */
     private String sql;
+
+    /**
+     * ttl>0:开启缓存,优先读取缓存,不存在则从数据库查询 ttl<0:强制查询,并更新缓存
+     */
     private Long ttl;
+
+    /**
+     * 数据库实例别名
+     */
     private String alias;
+
+    /**
+     * 授权标识
+     */
     private String token;
 
     public String getSql() {
