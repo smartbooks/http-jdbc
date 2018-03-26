@@ -1,6 +1,8 @@
 # http-jdbc
 - all jdbc support.
 - configuration auto refresh.
+- token validate.
+- redis cache support.
 
 ## 配置文件
 - 环境变量
