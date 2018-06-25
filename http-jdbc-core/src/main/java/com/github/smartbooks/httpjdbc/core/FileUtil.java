@@ -6,6 +6,7 @@ import java.io.*;
  * @author smartbooks@qq.com
  */
 public class FileUtil {
+
     public static String readFile(File file) {
         StringBuilder textContent = new StringBuilder();
         try {
@@ -36,4 +37,5 @@ public class FileUtil {
             e.printStackTrace();
         }
     }
+
 }
